@@ -4,6 +4,9 @@ successfully() {
   $* || (echo "failed" 1>&2 && exit 1)
 }
 
+echo "Installing Oh My Zsh"
+  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
 echo "Checking for SSH key, generating one if it doesn't exist ..."
   [[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
 
@@ -28,15 +31,11 @@ echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
   successfully brew install autoconf automake apple-gcc42
 
+echo "Installing git"
+  successfully brew install git
+
 echo "Installing libksba, recommended for Ruby 1.9.3 ..."
   successfully brew install libksba
-
-echo "Installing Postgres, a good open source relational database ..."
-  successfully brew install postgres --no-python
-  successfully initdb /usr/local/var/postgres -E utf8
-
-echo "Installing Redis, a good key-value database ..."
-  successfully brew install redis
 
 echo "Installing ack, for searching the contents of files ..."
   successfully brew install ack
@@ -44,20 +43,8 @@ echo "Installing ack, for searching the contents of files ..."
 echo "Installing ctags, for indexing files for vim tab completion of methods, classes, variables ..."
   successfully brew install ctags
 
-echo "Installing tmux, for saving project state and switching between projects ..."
-  successfully brew install tmux
-
-echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion compatibility with tmux ..."
-  successfully brew install reattach-to-user-namespace
-
 echo "Installing ImageMagick, for cropping and re-sizing images ..."
   successfully brew install imagemagick
-
-echo "Installing QT, used by Capybara Webkit for headless Javascript integration testing ..."
-  successfully brew install qt
-
-echo "Installing watch, used to execute a program periodically and show the output ..."
-  successfully brew install watch
 
 echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3-p327, which becomes the default ..."
   successfully curl -L https://get.rvm.io | bash -s stable --ruby
