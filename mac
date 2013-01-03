@@ -31,9 +31,6 @@ echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
   successfully brew install autoconf automake apple-gcc42
 
-echo "Installing git"
-  successfully brew install git
-
 echo "Installing libksba, recommended for Ruby 1.9.3 ..."
   successfully brew install libksba
 
@@ -58,6 +55,12 @@ echo "Installing critical Ruby gems for Rails development ..."
 
 echo "Installing standalone Heroku CLI client. You'll need administrative rights on your machine ..."
   successfully curl -s https://toolbelt.heroku.com/install.sh | sh
+
+echo "Adding Heroku CLI to path"
+  successfully echo "
+# Heroku CLI
+export PATH='/usr/local/heroku/bin:$PATH'" >> ~/.zshenv
+  successfully srouce ~/.zshenv
 
 echo "Installing the heroku-config plugin for pulling config variables locally to be used as ENV variables ..."
   successfully /usr/local/heroku/bin/heroku plugins:install git://github.com/ddollar/heroku-config.git
