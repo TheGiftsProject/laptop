@@ -67,7 +67,7 @@ echo "Installing the heroku-config plugin for pulling config variables locally t
   successfully /usr/local/heroku/bin/heroku plugins:install git://github.com/ddollar/heroku-config.git
 
 echo "Installing Pow. You'll need administrative rights"
-  successfully echo "export POW_DST_PORT=44444" >> ~/.powconfig
+  successfully echo "export POW_DST_PORT=19999" >> ~/.powconfig
   successfully curl get.pow.cx | sh
 
 echo "Installing Powder"
@@ -78,3 +78,9 @@ echo 'Create dev dir'
 
 echo "Installing Nginx"
   successfully brew install nginx
+
+echo "Installing nginx config"
+  successfully zsh < <(curl -s https://raw.github.com/TheGiftsProject/laptop/master/nginx)
+
+echo "Run Nginx"
+  successfully sudo nginx
