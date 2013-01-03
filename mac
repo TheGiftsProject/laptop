@@ -43,6 +43,8 @@ echo "Installing ctags, for indexing files for vim tab completion of methods, cl
 echo "Installing ImageMagick, for cropping and re-sizing images ..."
   successfully brew install imagemagick
 
+# Ruby 
+
 echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3-p327, which becomes the default ..."
   successfully curl -L https://get.rvm.io | bash -s stable --ruby
   successfully echo "
@@ -53,6 +55,8 @@ PATH='$HOME/.rvm/bin:$PATH'" >> ~/.zshrc
 
 echo "Installing critical Ruby gems for Rails development ..."
   successfully gem install bundler rails pg foreman thin --no-rdoc --no-ri
+
+# Heroku
 
 echo "Installing standalone Heroku CLI client. You'll need administrative rights on your machine ..."
   successfully curl -s https://toolbelt.heroku.com/install.sh | sh
@@ -65,6 +69,9 @@ export PATH='/usr/local/heroku/bin:$PATH'" >> ~/.zshrc
 
 echo "Installing the heroku-config plugin for pulling config variables locally to be used as ENV variables ..."
   successfully /usr/local/heroku/bin/heroku plugins:install git://github.com/ddollar/heroku-config.git
+
+# Nginx + Pow
+# http://www.jamesbadger.ca/2012/03/20/run-nginx-and-pow-on-your-mac/
 
 echo "Installing Pow. You'll need administrative rights"
   successfully echo "export POW_DST_PORT=19999" >> ~/.powconfig
@@ -84,3 +91,17 @@ echo "Installing nginx config"
 
 echo "Run Nginx"
   successfully sudo nginx
+
+# Mysql
+# http://madebyhoundstooth.com/blog/install-mysql-on-mountain-lion-with-homebrew/
+
+echo 'Installing Mysql'
+  successfully brew install mysql
+
+echo 'Configuring mysql'
+  successfully ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+  successfully launchctl load ~/Library/LaunchAgents/hombrew.mxcl.mysql.plist
+  successfully unset TMPDIR
+  successfully mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+  successfully mysql.server start
+
