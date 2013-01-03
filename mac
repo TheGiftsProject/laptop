@@ -92,16 +92,21 @@ echo "Installing nginx config"
 echo "Run Nginx"
   successfully sudo nginx
 
-# Mysql
+# MySQL
 # http://madebyhoundstooth.com/blog/install-mysql-on-mountain-lion-with-homebrew/
 
-echo 'Installing Mysql'
+echo 'Installing MySQL'
   successfully brew install mysql
 
-echo 'Configuring mysql'
+echo 'Configuring MySQL to launch on startup'
   successfully ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
   successfully launchctl load ~/Library/LaunchAgents/hombrew.mxcl.mysql.plist
   successfully unset TMPDIR
   successfully mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+
+echo 'Setting MySQL admin user'
+  successfully mysqladmin -u root password 'hello'
+
+echo 'Running MySQL'
   successfully mysql.server start
 
