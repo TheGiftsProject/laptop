@@ -1,3 +1,6 @@
+mkdir /usr/local/logs
+mkdir /usr/local/etc/nginx/servers
+
 echo "
 #user  nobody;
 worker_processes  1;
@@ -18,9 +21,9 @@ http {
     include       mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
+                      '\$status $body_bytes_sent "\$http_referer" '
+                      '"\$http_user_agent" "\$http_x_forwarded_for"';
 
     access_log  /usr/local/logs/access.log  main;
 
@@ -34,28 +37,16 @@ http {
 }
 " > /usr/local/etc/nginx/nginx.conf
 
-mkdir /usr/local/etc/nginx/servers
 
 echo "
 server {
   listen 80;
- 	server_name *.dev;
+ 	server_name *.dev *.xip.io;
 	location / {
-		proxy_set_header Host $host;
-		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host \$host;
+		proxy_set_header X-Real-IP \$remote_addr;
+		proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
 		proxy_redirect off;
 		proxy_pass http://localhost:20559; # The real pow port
 	}
-}
-server {
-  listen 80;
- 	server_name *.xip.io;
-	location / {
-		proxy_set_header Host $host;
-		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_redirect off;
-		proxy_pass http://localhost:20559; # The real pow port
-	}
-" >> /usr/local/etc/nginx/servers/zzzz-pow-xip.conf
+}" >> /usr/local/etc/nginx/servers/zzzz-pow-xip.conf
