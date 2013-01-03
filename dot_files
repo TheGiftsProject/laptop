@@ -5,7 +5,7 @@ install: --no-ri --no-rdoc
 update: --no-ri --no-rdoc
 " > ~/.gemrc
 
-echo "
+echo <<DELIM
 require 'rubygems' rescue nil
 
 require 'pp' # Pretty Print
@@ -30,7 +30,7 @@ class Object
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
 end
-" > ~/.irbrc
+DELIM > ~/.irbrc
 
 echo "
 set autolist
