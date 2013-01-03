@@ -49,4 +49,4 @@ server {
 		proxy_redirect off;
 		proxy_pass http://localhost:20559; # The real pow port
 	}
-}" >> /usr/local/etc/nginx/servers/zzzz-pow-xip.conf
+}" > /usr/local/etc/nginx/servers/zzzz-pow-xip.conf
