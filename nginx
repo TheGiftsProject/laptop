@@ -53,8 +53,11 @@ server {
 
 mkdir /usr/local/etc/nginx/ssl
 echo "please run the following commands to generate self signed ssl keys
-openssl genrsa -des3 -out /usr/local/etc/nginx/ssl/nixcraft.in.key 1024
-openssl req -new -key /usr/local/etc/nginx/ssl/nixcraft.in.key -out /usr/local/etc/nginx/ssl/nixcraft.in.csr
-openssl rsa -in /usr/local/etc/nginx/ssl/nixcraft.in.key.bak -out /usr/local/etc/nginx/ssl/nixcraft.in.key
-openssl x509 -req -days 365 -in /usr/local/etc/nginx/ssl/nixcraft.in.csr -signkey /usr/local/etc/nginx/ssl/nixcraft.in.key -out /usr/local/etc/nginx/ssl/nixcraft.in.crt
+
+cd /usr/local/etc/nginx/ssl
+openssl genrsa -des3 -out nixcraft.in.key 1024
+openssl req -new -key nixcraft.in.key -out nixcraft.in.csr
+cp nixcraft.in.key nixcraft.in.key.bak
+openssl rsa -in nixcraft.in.key.bak -out nixcraft.in.key
+openssl x509 -req -days 365 -in nixcraft.in.csr -signkey nixcraft.in.key -out nixcraft.in.crt
 "
