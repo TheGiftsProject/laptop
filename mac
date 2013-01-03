@@ -24,8 +24,8 @@ echo "Installing Homebrew, a good OS X package manager ..."
 echo "Putting Homebrew location earlier in PATH ..."
   successfully echo "
 # recommended by brew doctor
-export PATH='/usr/local/bin:$PATH'" >> ~/.zshenv
-  successfully source ~/.zshenv
+export PATH='/usr/local/bin:$PATH'" >> ~/.zshrc
+  successfully source ~/.zshrc
 
 echo "Installing GNU Compiler Collection and dependencies ..."
   successfully brew tap homebrew/dupes
@@ -47,7 +47,8 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3-p327, which becomes t
   successfully curl -L https://get.rvm.io | bash -s stable --ruby
   successfully echo "
 # RVM
-[[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
+[[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'
+PATH='$HOME/.rvm/bin:$PATH'" >> ~/.zshrc
   successfully source ~/.rvm/scripts/rvm
 
 echo "Installing critical Ruby gems for Rails development ..."
@@ -59,8 +60,21 @@ echo "Installing standalone Heroku CLI client. You'll need administrative rights
 echo "Adding Heroku CLI to path"
   successfully echo "
 # Heroku CLI
-export PATH='/usr/local/heroku/bin:$PATH'" >> ~/.zshenv
-  successfully srouce ~/.zshenv
+export PATH='/usr/local/heroku/bin:$PATH'" >> ~/.zshrc
+  successfully source ~/.zshrc
 
 echo "Installing the heroku-config plugin for pulling config variables locally to be used as ENV variables ..."
   successfully /usr/local/heroku/bin/heroku plugins:install git://github.com/ddollar/heroku-config.git
+
+echo "Installing Pow. You'll need administrative rights"
+  successfully echo "export POW_DST_PORT=44444" >> ~/.powconfig
+  successfully curl get.pow.cx | sh
+
+echo "Installing Powder"
+  successfully gem install powder --no-rdoc --no-ri
+
+echo 'Create dev dir'
+  successfully mkdir ~/Development
+
+echo "Installing Nginx"
+  successfully brew install nginx
