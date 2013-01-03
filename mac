@@ -110,3 +110,7 @@ echo 'Setting MySQL admin user'
 echo 'Running MySQL'
   successfully mysql.server start
 
+# Node
+echo 'Installind NodeJS'
+  successfully brew install node
+
