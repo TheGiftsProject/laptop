@@ -114,3 +114,14 @@ echo 'Running MySQL'
 echo 'Installind NodeJS'
   successfully brew install node
 
+# Other
+echo "Install dot files"
+  successfully zsh < <(curl -s https://raw.github.com/TheGiftsProject/laptop/master/dot_files)
+
+echo "Install the EyToolBox"
+  successfully gem install engineyard --no-rdoc --no-ri
+  successfully git clone git://github.com/yonbergman/EyToolbox.git ~/Development/EyToolbox
+  successfully ~/Development/EyToolbox/install.rb
+  
+  
+
