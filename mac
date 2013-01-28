@@ -24,7 +24,7 @@ echo "Installing Homebrew, a good OS X package manager ..."
 echo "Putting Homebrew location earlier in PATH ..."
   successfully echo "
 # recommended by brew doctor
-export PATH='/usr/local/bin:$PATH'" >> ~/.zshrc
+export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin'" >> ~/.zshrc
   successfully source ~/.zshrc
 
 echo "Installing GNU Compiler Collection and dependencies ..."
@@ -50,7 +50,7 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 1.9.3-p327, which becomes t
   successfully echo "
 # RVM
 [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'
-PATH='$HOME/.rvm/bin:$PATH'" >> ~/.zshrc
+PATH='$HOME/.rvm/bin:\$PATH'" >> ~/.zshrc
   successfully source ~/.rvm/scripts/rvm
 
 echo "Installing critical Ruby gems for Rails development ..."
@@ -64,7 +64,7 @@ echo "Installing standalone Heroku CLI client. You'll need administrative rights
 echo "Adding Heroku CLI to path"
   successfully echo "
 # Heroku CLI
-export PATH='/usr/local/heroku/bin:$PATH'" >> ~/.zshrc
+export PATH='/usr/local/heroku/bin:\$PATH'" >> ~/.zshrc
   successfully source ~/.zshrc
 
 echo "Installing the heroku-config plugin for pulling config variables locally to be used as ENV variables ..."
@@ -97,6 +97,7 @@ echo "Run Nginx"
 
 echo 'Installing MySQL'
   successfully brew install mysql
+  successfully source ~/.zshrc
 
 echo 'Configuring MySQL to launch on startup'
   successfully ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
